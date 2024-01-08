@@ -3,10 +3,7 @@ const Student = require('../models/Student');
 
 exports.getRoomById = async (req, res) => {
   try {
-    const room = await Room.findById(req.params.id);
-    if (!room) {
-      return res.status(404).json({ message: 'Room not found' });
-    }
+    // TODO: Fetch room by ID and send a response
     res.status(200).json(room);
   } catch (error) {
     console.error(error);
@@ -16,7 +13,7 @@ exports.getRoomById = async (req, res) => {
 
 exports.getAllRoom = async (req, res) => {
   try {
-    const room = await Room.find();
+    // TODO: Fetch all rooms and send a response
     res.status(200).json(room);
   } catch (error) {
     console.error(error);
@@ -26,16 +23,9 @@ exports.getAllRoom = async (req, res) => {
 
 exports.createRoom = async (req, res) => {
   try {
-    const { roomNumber, capacity } = req.body;
-
-    // Validate request data
-    if (!roomNumber || !capacity) {
-      return res.status(400).json({ message: 'Invalid request data' });
-    }
-
-    // Create a new room
-    const newRoom = new Room({ roomNumber, capacity });
-    await newRoom.save();
+    // TODO: Extract necessary details from the request body (roomNumber, capacity)
+    // TODO: Validate request data
+    // TODO: Create a new room and send a success response
 
     res
       .status(201)
@@ -48,24 +38,9 @@ exports.createRoom = async (req, res) => {
 
 exports.updateRoom = async (req, res) => {
   try {
-    const { roomNumber, capacity } = req.body;
-
-    // Validate request data
-    if (!roomNumber || !capacity) {
-      return res.status(400).json({ message: 'Invalid request data' });
-    }
-
-    // Update the room
-    const updatedRoom = await Room.findByIdAndUpdate(
-      req.params.id,
-      { roomNumber, capacity },
-      { new: true }
-    );
-
-    if (!updatedRoom) {
-      return res.status(404).json({ message: 'Room not found' });
-    }
-
+    // TODO: Extract necessary details from the request body (roomNumber, capacity)
+    // TODO: Validate request data
+    // TODO: Update the room and send a success response
     res
       .status(200)
       .json({ message: 'Room updated successfully', room: updatedRoom });
@@ -77,12 +52,7 @@ exports.updateRoom = async (req, res) => {
 
 exports.deleteRoom = async (req, res) => {
   try {
-    const deletedRoom = await Room.findByIdAndDelete(req.params.id);
-
-    if (!deletedRoom) {
-      return res.status(404).json({ message: 'Room not found' });
-    }
-
+    // TODO: Delete the room by ID and send a success response
     res
       .status(200)
       .json({ message: 'Room deleted successfully', room: deletedRoom });
@@ -93,31 +63,9 @@ exports.deleteRoom = async (req, res) => {
 };
 exports.addOccupantToRoom = async (req, res) => {
   try {
-    const { roomId, studentId } = req.body;
-
-    // Validate request data
-    if (!roomId || !studentId) {
-      return res.status(400).json({ message: 'Invalid request data' });
-    }
-
-    // Check if the room exists
-    const room = await Room.findById(roomId);
-    if (!room) {
-      return res.status(404).json({ message: 'Room not found' });
-    }
-
-    // Check if the student exists
-    const student = await Student.findById(studentId);
-    if (!student) {
-      return res.status(404).json({ message: 'Student not found' });
-    }
-
-    // Add the student to the occupants array
-    room.occupants.push(studentId);
-    await room.save();
-
-    // Populate occupants and send the response
-    await room.populate('occupants').execPopulate();
+    // TODO: Extract necessary details from the request body (roomId, studentId)
+    // TODO: Add the student to the occupants array
+    // TODO: Populate occupants and send the response
 
     res.status(200).json({
       message: 'Occupant added to room successfully',
